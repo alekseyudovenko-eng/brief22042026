@@ -1,197 +1,926 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vegetable Oils Market Report</title>
-<style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-    background: #0f172a;
-    color: #e2e8f0;
-}
-.container {
-    max-width: 720px;
-    margin: auto;
-    padding: 20px;
-}
-.card {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 16px;
-    margin-bottom: 16px;
-}
-h1, h2 {
-    margin-top: 0;
-}
-button {
-    background: #3b82f6;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 16px;
-}
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-.table td {
-    padding: 6px 4px;
-    border-bottom: 1px solid #334155;
-}
-.small {
-    font-size: 13px;
-    color: #94a3b8;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>Рынок растительных масел и жиров | Vegetable Oils & Fats Market</title>
+    <style>
+        :root {
+            --bg: #f0f1f5;
+            --card: #ffffff;
+            --text: #1a1a2e;
+            --text2: #5a5a7a;
+            --accent: #e9c46a;
+            --accent2: #d4a843;
+            --navy: #1a1a2e;
+            --navy2: #16213e;
+            --navy3: #0f3460;
+            --green: #2a9d8f;
+            --red: #e76f51;
+            --border: #e8e8ec;
+            --shadow: 0 2px 12px rgba(26,26,46,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 40%, var(--navy3) 100%);
+            padding: 28px 20px 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -40px;
+            width: 180px; height: 180px;
+            background: rgba(233,196,106,0.06);
+            border-radius: 50%;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: -20px;
+            width: 120px; height: 120px;
+            background: rgba(233,196,106,0.04);
+            border-radius: 50%;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(233,196,106,0.12);
+            color: var(--accent);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(233,196,106,0.18);
+        }
+
+        .badge-pulse {
+            width: 6px; height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.8); }
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 3px;
+            background: rgba(255,255,255,0.08);
+            padding: 3px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .lang-btn {
+            padding: 5px 14px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--navy);
+            box-shadow: 0 2px 8px rgba(233,196,106,0.3);
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.3px;
+        }
+
+        .header-sub {
+            color: rgba(255,255,255,0.55);
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== DATE STRIP ===== */
+        .date-strip {
+            background: var(--accent);
+            color: var(--navy);
+            padding: 10px 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            letter-spacing: 0.3px;
+        }
+
+        .date-strip .muted {
+            opacity: 0.65;
+            font-weight: 600;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            background: var(--card);
+            margin: 12px 0;
+            padding: 22px 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .section:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-icon {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .section-icon.gold { background: rgba(233,196,106,0.12); }
+        .section-icon.blue { background: rgba(15,52,96,0.08); }
+        .section-icon.red { background: rgba(231,111,81,0.08); }
+        .section-icon.green { background: rgba(42,157,143,0.08); }
+        .section-icon.purple { background: rgba(118,75,162,0.08); }
+        .section-icon.navy { background: rgba(26,26,46,0.06); }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .section-body {
+            font-size: 14.5px;
+            color: var(--text2);
+            line-height: 1.75;
+        }
+
+        .section-body p {
+            margin-bottom: 14px;
+        }
+
+        .section-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== HIGHLIGHT BOX ===== */
+        .highlight-box {
+            background: linear-gradient(135deg, #fafbfc 0%, #fff 100%);
+            border-left: 3px solid var(--accent);
+            padding: 16px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 0 12px 12px 0;
+            background: linear-gradient(135deg, rgba(233,196,106,0.03), transparent);
+            pointer-events: none;
+        }
+
+        .highlight-box strong {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .highlight-box p {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== TABLES ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-wrap::-webkit-scrollbar {
+            height: 4px;
+        }
+        .table-wrap::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            min-width: 520px;
+        }
+
+        thead {
+            background: var(--navy);
+            color: #fff;
+        }
+
+        th {
+            padding: 11px 14px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border);
+            color: #333;
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: #fafbfc;
+        }
+
+        .price-up { color: var(--green); font-weight: 700; }
+        .price-down { color: var(--red); font-weight: 700; }
+        .price-stable { color: #888; font-weight: 700; }
+        .price-alert { color: var(--red); font-weight: 700; }
+
+        .table-source {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ===== SUB-SECTION ===== */
+        .sub-section {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px dashed #e0e0e5;
+        }
+
+        .sub-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--navy3);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-title::before {
+            content: '';
+            width: 4px;
+            height: 14px;
+            background: var(--navy3);
+            border-radius: 3px;
+        }
+
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .stat-card {
+            background: #f8f9fb;
+            padding: 18px 14px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:active {
+            transform: scale(0.97);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #999;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* ===== CONCLUSION ===== */
+        .conclusion-box {
+            background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 50%, var(--navy3) 100%);
+            color: #fff;
+            padding: 26px 20px;
+            margin: 12px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion-box::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 140px; height: 140px;
+            background: rgba(233,196,106,0.05);
+            border-radius: 50%;
+        }
+
+        .conclusion-box .section-title {
+            color: var(--accent);
+        }
+
+        .conclusion-box .section-body {
+            color: rgba(255,255,255,0.82);
+        }
+
+        .conclusion-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .conclusion-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .conclusion-num {
+            width: 28px; height: 28px;
+            background: var(--accent);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #e8e8ec;
+            padding: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+            margin-top: 12px;
+        }
+
+        .footer-divider {
+            width: 36px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto 10px;
+            border-radius: 2px;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-ru, .lang-en {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lang-ru.active, .lang-en.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== INLINE LANG IN TABLES ===== */
+        td .lang-ru, td .lang-en,
+        th .lang-ru, th .lang-en {
+            display: inline;
+        }
+
+        td .lang-ru.active, td .lang-en.active,
+        th .lang-ru.active, th .lang-en.active {
+            display: inline;
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px; height: 44px;
+            background: var(--accent);
+            color: var(--navy);
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(233,196,106,0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== TELEGRAM SPECIFIC ===== */
+        @media (max-width: 600px) {
+            .app { border-radius: 0; }
+            .section { margin: 8px 0; padding: 18px 16px; }
+            .header { padding: 24px 16px 20px; }
+            .header h1 { font-size: 19px; }
+            .date-strip { padding: 10px 16px; font-size: 10px; }
+            .section-body { font-size: 14px; }
+            table { font-size: 12px; }
+            th, td { padding: 9px 11px; }
+            .stat-value { font-size: 22px; }
+        }
+
+        /* Dark mode support hint for Telegram */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #12121a;
+                --card: #1e1e2e;
+                --text: #e8e8f0;
+                --text2: #a0a0b8;
+                --border: #2a2a3e;
+            }
+            .stat-card { background: #252538; }
+            .highlight-box { background: linear-gradient(135deg, #252538 0%, #1e1e2e 100%); }
+            tr:nth-child(even) { background: #252538; }
+            td { color: #ccc; }
+            .footer { background: #1a1a28; }
+        }
+    </style>
+<base target="_blank">
 </head>
 <body>
+    <div class="app">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-top">
+                <div class="badge">
+                    <span class="badge-pulse"></span>
+                    <span class="lang-ru active">Аналитический отчёт</span>
+                    <span class="lang-en">Analytical Report</span>
+                </div>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="setLang('ru')" aria-label="Russian">RU</button>
+                    <button class="lang-btn" onclick="setLang('en')" aria-label="English">EN</button>
+                </div>
+            </div>
+            <h1>
+                <span class="lang-ru active">Рынок растительных масел и жиров</span>
+                <span class="lang-en">Vegetable Oils & Fats Market</span>
+            </h1>
+            <div class="header-sub">
+                <span class="lang-ru active">Ключевые события: 11–19 апреля 2026</span>
+                <span class="lang-en">Key Events: April 11–19, 2026</span>
+            </div>
+        </div>
 
-<div class="container">
-<button onclick="toggleLang()">Switch Language</button>
+        <!-- DATE STRIP -->
+        <div class="date-strip">
+            <span>
+                <span class="lang-ru active">📍 Страны: ЕС-27, Азербайджан, Армения, Беларусь, Казахстан, Кыргызстан, Россия, Таджикистан, Туркменистан, Узбекистан, Грузия, Украина</span>
+                <span class="lang-en">📍 Countries: EU-27, Azerbaijan, Armenia, Belarus, Kazakhstan, Kyrgyzstan, Russia, Tajikistan, Turkmenistan, Uzbekistan, Georgia, Ukraine</span>
+            </span>
+        </div>
 
-<div id="ru">
+        <!-- EXECUTIVE SUMMARY -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon gold">📋</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Резюме</span>
+                    <span class="lang-en">Executive Summary</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <p class="lang-ru active">
+                    Рынок растительных масел в период с 11 по 19 апреля 2026 года находится в состоянии крайней турбулентности, вызванной беспрецедентным сочетанием геополитических потрясений и структурных изменений в цепочках поставок. Главный драйвер волатильности — военный конфликт на Ближнем Востоке, приведший к фактическому закрытию Ормузского пролива, через который проходит 20% мировых поставок нефти и СПГ. Рост энерготарифов мгновенно отразился на стоимости растительных масел через механизмы биодизельного паритета и логистики.
+                </p>
+                <p class="lang-en">
+                    The vegetable oils market during April 11–19, 2026, is in a state of extreme turbulence caused by an unprecedented combination of geopolitical shocks and structural supply chain changes. The main volatility driver is the military conflict in the Middle East, which led to the effective closure of the Strait of Hormuz — a critical maritime route facilitating 20% of global oil and LNG supplies. The rise in energy prices has instantly reflected on vegetable oil costs through biodiesel parity mechanisms and logistics.
+                </p>
+                <div class="highlight-box">
+                    <p class="lang-ru active">
+                        <strong>Ключевой тренд:</strong> в регионах Европы, Центральной Азии и Кавказа наблюдается устойчивый переход к альтернативным логистическим маршрутам, таким как Транскаспийский международный транспортный маршрут (ТМТМ), который становится альтернативой для экспортёров Юго-Восточной Азии.
+                    </p>
+                    <p class="lang-en">
+                        <strong>Key Trend:</strong> In Europe, Central Asia, and the Caucasus regions, there is a distinct shift toward alternative logistics routes, such as the Trans-Caspian International Transport Route (TITR), becoming an alternative for Southeast Asian exporters.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-<h1>Аналитический отчет: рынок растительных масел</h1>
-<p class="small">Период: 11–19 апреля 2026</p>
-</div>
+        <!-- PRICING -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon blue">💰</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Ценообразование</span>
+                    <span class="lang-en">Pricing Dynamics</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <p class="lang-ru active">
+                    В апреле 2026 года цены на пальмовое масло остаются высокими по историческим меркам. В Европе пальмовое масло сохраняет ценовое преимущество перед подсолнечным и соевым, что поддерживает спрос со стороны пищевой промышленности.
+                </p>
+                <p class="lang-en">
+                    In April 2026, palm oil prices remain high by historical standards. In Europe, palm oil maintains a price advantage over sunflower and soybean oils, supporting demand from the food industry.
+                </p>
 
-<div class="card">
-<h2>Краткое резюме</h2>
-<p>Рынок находится в состоянии высокой турбулентности. Основной фактор — геополитика и перебои в логистике, включая ограничения в Ормузском проливе. Рост цен на энергию увеличил стоимость масел через биодизель и транспорт.</p>
-<p>Активно развивается альтернативная логистика, включая Транскаспийский маршрут.</p>
-</div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><span class="lang-ru active">Товар</span><span class="lang-en">Commodity</span></th>
+                                <th><span class="lang-ru active">Базис</span><span class="lang-en">Basis</span></th>
+                                <th><span class="lang-ru active">Цена</span><span class="lang-en">Price</span></th>
+                                <th><span class="lang-ru active">Изм.</span><span class="lang-en">Change</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RBD Olein</td>
+                                <td>Bursa Malaysia</td>
+                                <td>$1,175/t</td>
+                                <td class="price-up">+9.9%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="lang-ru active">Подсолнечное масло</span><span class="lang-en">Sunflower Oil</span></td>
+                                <td><span class="lang-ru active">FOB Чёрное море</span><span class="lang-en">FOB Black Sea</span></td>
+                                <td>$1,340/t</td>
+                                <td class="price-stable">Stable</td>
+                            </tr>
+                            <tr>
+                                <td><span class="lang-ru active">Соевое масло</span><span class="lang-en">Soybean Oil</span></td>
+                                <td>CBOT</td>
+                                <td>$1,315/t</td>
+                                <td class="price-down">−0.79%</td>
+                            </tr>
+                            <tr>
+                                <td><span class="lang-ru active">Рапсовое масло</span><span class="lang-en">Rapeseed Oil</span></td>
+                                <td><span class="lang-ru active">FOB Роттердам</span><span class="lang-en">FOB Rotterdam</span></td>
+                                <td>$1,340/t</td>
+                                <td class="price-up">+2.2%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-source">
+                    <span class="lang-ru active">Источник: tradingeconomics.com | Период: 11–19 апреля 2026</span>
+                    <span class="lang-en">Source: tradingeconomics.com | Period: April 11–19, 2026</span>
+                </div>
 
-<div class="card">
-<h2>Цены и конкуренция</h2>
-<p>Пальмовое масло сохраняет ценовое преимущество над подсолнечным и соевым.</p>
+                <p class="lang-ru active" style="margin-top:14px;">
+                    Сужение спреда пальмовое масло — газойль улучшило экономику биодизеля и поддержало малайзийские цены, однако чёткого ценового пола на уровне RM 4,450/т пока не наблюдается.
+                </p>
+                <p class="lang-en" style="margin-top:14px;">
+                    The narrowing palm oil–gasoil spread improved biodiesel economics and supported Malaysian prices, but there is no clear evidence of a fixed price floor at RM 4,450/mt.
+                </p>
+            </div>
+        </div>
 
-<table class="table">
-<tr><td>Пальмовое масло</td><td>$1175/t</td><td>+9.9%</td></tr>
-<tr><td>Подсолнечное масло</td><td>$1340/t</td><td>стабильно</td></tr>
-<tr><td>Соевое масло</td><td>$1315/t</td><td>-0.8%</td></tr>
-<tr><td>Рапсовое масло</td><td>$1340/t</td><td>+2.2%</td></tr>
-</table>
+        <!-- PRODUCTION & TRADE -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon green">🌾</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Производство и торговля</span>
+                    <span class="lang-en">Production & Trade Flows</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <p class="lang-ru active">
+                    Ситуация в Чёрноморском регионе остаётся ключевым фактором, ограничивающим мировое предложение. В Украине производство подсолнечного масла в 2026 году оценивается около 4 млн тонн — значительно ниже довоенных уровней. Цены FOB остаются высокими, спрос сдерживается логистическими рисками.
+                </p>
+                <p class="lang-en">
+                    The Black Sea situation remains a key factor limiting global supply. In Ukraine, sunflower oil production in 2026 is estimated at around 4 million tons — significantly below pre-war levels. FOB prices remain high, while demand is restrained by logistical risks.
+                </p>
 
-<p class="small">Фактор поддержки: рост цен на энергию и биотопливо</p>
-</div>
+                <div class="sub-section">
+                    <div class="sub-title">
+                        <span class="lang-ru active">Россия и Украина</span>
+                        <span class="lang-en">Russia & Ukraine</span>
+                    </div>
+                    <p class="lang-ru active">
+                        Украинские переработчики испытывают дефицит сырья из-за слабого урожая подсолнечника в 2025 году. Это поддерживает высокие закупочные цены и стимулирует частичный переход к сое. В России высокие посевные площади обеспечивают значительное предложение, но экспорт сдерживается демпинговым механизмом и повышенными пошлинами.
+                    </p>
+                    <p class="lang-en">
+                        Ukrainian processors face raw material shortages due to the weak 2025 sunflower harvest. This keeps domestic procurement prices high and encourages a partial shift to soybeans. In Russia, high planting areas ensure significant supply, but exports are restrained by the damping mechanism and increased duties.
+                    </p>
 
-<div class="card">
-<h2>Производство и торговля</h2>
-<p><b>Черноморский регион:</b> ограниченное предложение. Украина — около 4 млн т (ниже довоенного уровня). Высокие цены при слабом спросе.</p>
-<p><b>Россия:</b> стабильное внутреннее предложение, но экспорт ограничен пошлинами.</p>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-ru active">Месяц</span><span class="lang-en">Month</span></th>
+                                    <th><span class="lang-ru active">Экспортная пошлина, РФ (руб./т)</span><span class="lang-en">Export Duty, Russia (RUB/t)</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="lang-ru active">Февраль 2026</span><span class="lang-en">February 2026</span></td>
+                                    <td>9,495.0</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="lang-ru active">Март 2026</span><span class="lang-en">March 2026</span></td>
+                                    <td>9,687.0</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="lang-ru active">Апрель 2026</span><span class="lang-en">April 2026</span></td>
+                                    <td class="price-alert">16,222.4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-source">
+                        <span class="lang-ru active">Источник: Минсельхоз РФ | Период: 10–20 апреля 2026</span>
+                        <span class="lang-en">Source: Ministry of Agriculture of Russia | Period: April 10–20, 2026</span>
+                    </div>
+                </div>
 
-<p><b>Центральная Азия:</b> усиливается как рынок сбыта. Казахстан увеличивает производство и экспорт. Узбекистан — ключевой хаб с поддержкой инфраструктуры и налоговым контролем (AI-системы для НДС).</p>
-</div>
+                <div class="sub-section">
+                    <div class="sub-title">
+                        <span class="lang-ru active">Центральная Азия и Кавказ</span>
+                        <span class="lang-en">Central Asia & Caucasus</span>
+                    </div>
+                    <p class="lang-ru active">
+                        Центральная Азия становится всё более важным рынком сбыта. Казахстан укрепляет позиции регионального хаба: в 2025 году производство растительных масел выросло на 17,4%, экспорт масложировой продукции в Китай — на 44%. В апреле 2026 года делегация из 35 закупщиков из стран ЦА посетила Малайзию, итогом стали сделки на 47,5 млн ринггит ($10,8 млн).
+                    </p>
+                    <p class="lang-en">
+                        Central Asia is becoming an increasingly important sales market. Kazakhstan is strengthening its position as a regional hub: in 2025, vegetable oil production rose by 17.4%, and exports of oil and fat products to China increased by 44%. In April 2026, a delegation of 35 buyers from CA countries visited Malaysia, resulting in deals worth 47.5 million ringgit ($10.8 million).
+                    </p>
 
-<div class="card">
-<h2>Логистика</h2>
-<p>Рост страхования и фрахта. Стоимость страхования — до 1% стоимости судна.</p>
-<p>Фрахт Азия–Европа вырос более чем на 20%.</p>
+                    <div class="highlight-box">
+                        <p class="lang-ru active">
+                            <strong>Узбекистан:</strong> ключевой партнёр для дистрибуции пальмового масла. Посол Узбекистана в Малайзии предложил создать центры хранения в Узбекистане для оптимизации поставок по Центральной Азии. С 1 января 2026 года введена система ИИ-анализа инвойсов для возмещения НДС — требуется безупречная прозрачность цепочек поставок.
+                        </p>
+                        <p class="lang-en">
+                            <strong>Uzbekistan:</strong> A key partner for palm oil distribution. The Uzbek Ambassador to Malaysia proposed establishing storage centers in Uzbekistan to optimize supplies across Central Asia. Since January 1, 2026, an AI-based invoice analysis system for VAT reimbursement has been introduced — requiring impeccable supply chain transparency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<p><b>Альтернатива:</b> Транскаспийский маршрут — сокращение транзита до ~30 дней.</p>
-</div>
+        <!-- LOGISTICS -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon red">🚢</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Логистика и безопасность</span>
+                    <span class="lang-en">Logistics & Security</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <p class="lang-ru active">
+                    В апреле 2026 года безопасность торговых маршрутов стала определяющим фактором стоимости. Закрытие Ормузского пролива и продолжающиеся атаки БПЛА в Чёрном море привели к существенным сбоям и необходимости перенаправления грузопотоков.
+                </p>
+                <p class="lang-en">
+                    In April 2026, trade route security became a determining cost factor. The closure of the Strait of Hormuz and ongoing drone attacks in the Black Sea have led to material disruptions and significant rerouting pressure.
+                </p>
 
-<div class="card">
-<h2>Регулирование (ЕС)</h2>
-<p>Регламент EUDR вступает в силу с конца 2026 года.</p>
-<p>Ключевой фактор — не сам комплаенс, а качество данных и прослеживаемость цепочек поставок.</p>
-</div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value" style="color:var(--red);">1%</div>
+                        <div class="stat-label">
+                            <span class="lang-ru active">Страховка<br>Чёрное море</span>
+                            <span class="lang-en">Black Sea<br>Insurance</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" style="color:var(--red);">+20%</div>
+                        <div class="stat-label">
+                            <span class="lang-ru active">Фрахт<br>Азия→Европа</span>
+                            <span class="lang-en">Freight<br>Asia→Europe</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="card">
-<h2>Выводы</h2>
-<p>Рынок переходит в новую фазу, где критичны:</p>
-<ul>
-<li>логистика</li>
-<li>прозрачность данных</li>
-<li>региональные хабы (Центральная Азия)</li>
-</ul>
-</div>
+                <p class="lang-ru active">
+                    Стоимость военно-рисковой страховки для судов, заходящих в порты России и Украины, достигла 1% от стоимости судна к середине апреля (против 0,6% в конце 2025). Крупнейшие перевозчики, включая Maersk, ввели «чрезвычайные бункерные надбавки» из-за волатильности топливных цен.
+                </p>
+                <p class="lang-en">
+                    War risk insurance costs for vessels entering Russian and Ukrainian ports reached 1% of vessel value by mid-April (up from 0.6% at end-2025). Major carriers, including Maersk, have implemented "emergency bunker surcharges" due to fuel price volatility.
+                </p>
 
-</div>
+                <div class="sub-section">
+                    <div class="sub-title">
+                        <span class="lang-ru active">ТМТМ: стратегическая альтернатива</span>
+                        <span class="lang-en">TITR: A Strategic Alternative</span>
+                    </div>
+                    <p class="lang-ru active">
+                        Транскаспийский маршрут (Средний коридор) демонстрирует перспективные результаты. К апрелю 2026 года транзитное время из Китая/Юго-Восточной Азии в Европу через Казахстан и Кавказ сократилось до 30 дней (с 60 дней в 2022 году). Казахстан ускоряет интеграцию цифровых логистических систем с Азербайджаном и Грузией и планирует соглашение о совместной эксплуатации контейнерного флота на линии Актау — Баку.
+                    </p>
+                    <p class="lang-en">
+                        The Trans-Caspian route (Middle Corridor) is showing promising results. By April 2026, transit times from China/Southeast Asia to Europe via Kazakhstan and the Caucasus have been reduced to 30 days (down from 60 days in 2022). Kazakhstan is accelerating the integration of digital logistics systems with Azerbaijan and Georgia, and plans an agreement for joint container fleet operation on the Aktau–Baku line.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<div id="en" style="display:none;">
+        <!-- REGULATORY -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon purple">⚖️</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Регуляторика: EUDR</span>
+                    <span class="lang-en">Regulatory: EUDR</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <p class="lang-ru active">
+                    Регламент ЕС по обезлесению (EUDR) остаётся одной из ключевых регуляторных тем для европейского рынка. По пересмотренному графику вступления в силу: <strong>30 декабря 2026</strong> — для средних и крупных операторов, <strong>30 июня 2027</strong> — для микро- и малых предприятий.
+                </p>
+                <p class="lang-en">
+                    The EU Deforestation Regulation (EUDR) remains one of the key regulatory themes for the European market. Under the revised timeline: <strong>December 30, 2026</strong> — for medium and large operators, <strong>June 30, 2027</strong> — for micro and small enterprises.
+                </p>
 
-<div class="card">
-<h1>Vegetable Oils Market Report</h1>
-<p class="small">Period: April 11–19, 2026</p>
-</div>
+                <div class="highlight-box">
+                    <p class="lang-ru active">
+                        <strong>Ожидается публикация упрощённого обзора (апрель 2026):</strong> снижение административной нагрузки, уточнение механизмов внедрения, улучшение готовности данных по цепочкам поставок. Для импортёров пальмового масла ключевой вопрос — качество данных трассируемости и интеграция внутренних систем с информационной платформой ЕС.
+                    </p>
+                    <p class="lang-en">
+                        <strong>April 2026 simplification review expected:</strong> reducing administrative burden, clarifying implementation mechanics, improving supply chain data readiness. For palm oil importers, the key issue is the quality of traceability data and integration of internal systems with the EU information platform.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-<h2>Executive Summary</h2>
-<p>The market remains highly volatile due to geopolitical disruptions and logistics constraints, including the Strait of Hormuz impact.</p>
-<p>Energy price growth is driving vegetable oil costs via biodiesel and freight.</p>
-<p>Alternative routes like the Trans-Caspian corridor are gaining importance.</p>
-</div>
+        <!-- CONCLUSION -->
+        <div class="conclusion-box">
+            <div class="section-header" style="margin-bottom:18px;">
+                <div class="section-icon" style="background:rgba(233,196,106,0.15);">🎯</div>
+                <div class="section-title">
+                    <span class="lang-ru active">Выводы для индустрии</span>
+                    <span class="lang-en">Implications for the Industry</span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="conclusion-item">
+                    <div class="conclusion-num">1</div>
+                    <div>
+                        <span class="lang-ru active"><strong>Центральная Азия:</strong> ускорить создание региональных хабов в Узбекистане (Ташкент/Навои) для снижения логистических издержек.</span>
+                        <span class="lang-en"><strong>Central Asia:</strong> Accelerate the establishment of regional hubs in Uzbekistan (Tashkent/Navoi) to reduce logistical burdens.</span>
+                    </div>
+                </div>
+                <div class="conclusion-item">
+                    <div class="conclusion-num">2</div>
+                    <div>
+                        <span class="lang-ru active"><strong>Логистика:</strong> перенаправить часть потоков для Кавказа и Черноморского побережья на железнодорожный транспорт через Китай и Казахстан (ТМТМ) для избежания морских надбавок в Индийском океане.</span>
+                        <span class="lang-en"><strong>Logistics:</strong> Redirect some flows for the Caucasus and Black Sea coast to rail transport through China and Kazakhstan (TITR) to avoid maritime surcharges in the Indian Ocean.</span>
+                    </div>
+                </div>
+                <div class="conclusion-item">
+                    <div class="conclusion-num">3</div>
+                    <div>
+                        <span class="lang-ru active"><strong>Новая нормальность:</strong> доступ к безопасным транспортным коридорам и прозрачность экологических данных становятся важнее базовой стоимости сырья. Средний коридор и страны Центральной Азии — ключевые союзники для удержания и расширения доли рынка в Евразии.</span>
+                        <span class="lang-en"><strong>New Normal:</strong> Access to secure transport corridors and environmental data transparency are becoming more important than basic raw material costs. The Middle Corridor and Central Asian countries are key allies for maintaining and expanding market share in Eurasia.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="card">
-<h2>Pricing & Competition</h2>
-<p>Palm oil keeps a price advantage over sunflower and soybean oil.</p>
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="footer-divider"></div>
+            <span class="lang-ru active">Аналитический отчёт | 20 апреля 2026</span>
+            <span class="lang-en">Analytical Report | April 20, 2026</span>
+        </div>
+    </div>
 
-<table class="table">
-<tr><td>Palm Oil</td><td>$1175/t</td><td>+9.9%</td></tr>
-<tr><td>Sunflower Oil</td><td>$1340/t</td><td>Stable</td></tr>
-<tr><td>Soybean Oil</td><td>$1315/t</td><td>-0.8%</td></tr>
-<tr><td>Rapeseed Oil</td><td>$1340/t</td><td>+2.2%</td></tr>
-</table>
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
 
-<p class="small">Support factor: energy & biodiesel demand</p>
-</div>
+    <script>
+        // Language switcher
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            document.querySelectorAll('.lang-ru, .lang-en').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.lang-' + lang).forEach(el => {
+                el.classList.add('active');
+            });
+            // Save preference
+            try { localStorage.setItem('preferredLang', lang); } catch(e) {}
+        }
 
-<div class="card">
-<h2>Production & Trade</h2>
-<p><b>Black Sea:</b> tight supply. Ukraine ~4M tons, below historical levels.</p>
-<p><b>Russia:</b> stable domestic supply, exports limited by duties.</p>
+        // Restore saved language
+        (function() {
+            try {
+                const saved = localStorage.getItem('preferredLang');
+                if (saved && saved !== 'ru') setLang(saved);
+            } catch(e) {}
+        })();
 
-<p><b>Central Asia:</b> growing demand hub. Kazakhstan expanding exports. Uzbekistan emerging as a logistics and distribution center.</p>
-</div>
+        // Scroll to top button
+        const scrollBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollBtn.classList.toggle('visible', window.scrollY > 400);
+        });
 
-<div class="card">
-<h2>Logistics</h2>
-<p>Insurance costs up to 1% of vessel value.</p>
-<p>Asia–Europe freight +20%.</p>
-
-<p><b>Alternative:</b> Trans-Caspian corridor (~30 days transit).</p>
-</div>
-
-<div class="card">
-<h2>Regulation (EU)</h2>
-<p>EUDR enforcement starts late 2026.</p>
-<p>Key challenge: traceability and data integration.</p>
-</div>
-
-<div class="card">
-<h2>Conclusion</h2>
-<p>The market is shifting to a “new normal” where key factors are:</p>
-<ul>
-<li>secure logistics</li>
-<li>data transparency</li>
-<li>regional hubs (Central Asia)</li>
-</ul>
-</div>
-
-</div>
-
-</div>
-
-<script>
-function toggleLang() {
-    const ru = document.getElementById('ru');
-    const en = document.getElementById('en');
-    if (ru.style.display === 'none') {
-        ru.style.display = 'block';
-        en.style.display = 'none';
-    } else {
-        ru.style.display = 'none';
-        en.style.display = 'block';
-    }
-}
-</script>
-
+        // Telegram WebApp integration
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.expand();
+        }
+    </script>
 </body>
 </html>
